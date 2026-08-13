@@ -7,9 +7,7 @@ _ _ _ ____ ___ ____ ____ _  _ ____ ____ _  _ ____    ____ ____ _  _ ____ _  _ __
 # watermarks-remover
 
 <!-- logo: figlet -d .figlet -f cybermedium -w 120 "watermarks-remover" -->
-
-[![CI](https://github.com/guillaumemeyer/watermarks-remover/actions/workflows/ci.yml/badge.svg)](https://github.com/guillaumemeyer/watermarks-remover/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/guillaumemeyer/watermarks-remover)](https://github.com/guillaumemeyer/watermarks-remover/releases)
+ 
 
 Agent skill + stdlib Python scripts to strip **multi-vendor AI provenance marks** from text and files — for privacy and hygiene on content **you own**.
 
@@ -21,7 +19,7 @@ Agent skill + stdlib Python scripts to strip **multi-vendor AI provenance marks*
 
 Vendors / ecosystems (class-level): **Claude**, **Gemini / SynthID-Text**, **OpenAI** provenance surfaces, **open-LLM** Kirchenbauer-style marks.
 
-**Latest release:** [v0.3.2](https://github.com/guillaumemeyer/watermarks-remover/releases/tag/v0.3.2)
+ 
 
 Skill path: [`skills/remove-ai-marks/`](skills/remove-ai-marks/)  
 (migration: formerly `remove-claude-marks`; slash alias `/remove-claude-marks` still documented)
@@ -44,8 +42,7 @@ Optional system tools (auto-used when present):
 
 | Tool | Role |
 | --- | --- |
-| [`c2patool`](https://github.com/contentauth/c2pa-rs/tree/main/cli) | Inspect C2PA manifests |
-| [`exiftool`](https://exiftool.org/) | Residual metadata strip (esp. **PDF**) |
+ 
 
 Core scripts need **Python 3.10+** stdlib only. Layer B model calls are optional.
 
@@ -81,7 +78,7 @@ python3 "$SCRIPTS/clean_image.py" shot.png -o shot.cleaned.png
 
 `inspect_image.py` and `clean_image.py` can report a pixel-domain SynthID
 confidence score when an external checkout of
-[`aloshdenny/reverse-SynthID`](https://github.com/aloshdenny/reverse-SynthID)
+ 
 is available. The scorer is **not bundled**: it is loaded at runtime from your
 checkout, and its code remains under the upstream project's non-commercial
 Research License.
@@ -136,8 +133,7 @@ watermarks.
 | C2PA / file metadata | Yes (listed formats) | Yes when present | Yes when present | Yes when present |
 | Pixel image marks | Out of scope | Optional SynthID score (external); removal out of scope | Out of scope | Out of scope |
 | Training backdoors | Out of scope | Out of scope | Out of scope | Out of scope |
-
-Details: [`skills/remove-ai-marks/references/vendor-notes.md`](skills/remove-ai-marks/references/vendor-notes.md), [`mark-classes.md`](skills/remove-ai-marks/references/mark-classes.md).
+ 
 
 ---
 
@@ -196,26 +192,8 @@ This tool reports **verifiable** removals (Unicode counts, metadata actions) and
 
 To check residual signals yourself (optional, external):
 
-| Channel | What we remove | What may remain | External check (examples) |
-| --- | --- | --- | --- |
-| Hard-bound C2PA / EXIF / XMP | Yes | Soft-bound / pixel marks | [c2patool](https://github.com/contentauth/c2pa-rs/tree/main/cli), [Content Credentials verify](https://contentcredentials.org/verify) |
-| SynthID-class media | No (optional local score only) | Pixel/audio/video watermark | Provider tools (e.g. [Google SynthID](https://deepmind.google/science/synthid/) / Vertex detector where offered); optional local [reverse-SynthID](https://github.com/aloshdenny/reverse-SynthID) scorer |
-| Statistical text | Best-effort rewrite | Strong marks after light edit | No public universal detector; vendor tools when available |
-
-Industry two-layer context (C2PA + imperceptible watermark): [Institute of AI PM guide](https://www.institutepm.com/knowledge-hub/ai-content-provenance-watermarking).
-
----
-
-## Removal options (summary)
-
-| Option | Removes | Notes |
-| --- | --- | --- |
-| Unicode scrub (Layer A) | ZWSP, bidi, tags, exotic spaces, … | Safe default for text |
-| Rewrite (Layer B) | Statistical token marks (best-effort) | Always offered by skill; costs style — see [Disclaimer](#disclaimer-what-removing-a-text-watermark-costs) |
-| Container/metadata strip | File provenance | See format table |
-| Open-weight local models | Avoid re-stamping with origin model | Operational alternative |
-
-Matrix: [`skills/remove-ai-marks/references/removal-matrix.md`](skills/remove-ai-marks/references/removal-matrix.md).
+ 
+--- 
 
 ## Ethics
 
@@ -287,26 +265,11 @@ make smoke                          # quick CLI smoke on fixtures
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=guillaumemeyer%2Fwatermarks-remover&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=guillaumemeyer/watermarks-remover&type=date&theme=dark&legend=top-left&sealed_token=OLC1f1vbYBuk_xFR_ZH94jbC46Ci9cOhtXLcLIel7gnWVpQu7g-92es0u5d7IV2249FGEO6O7upS8xR_EGk_CwkVXq5yhS77M6zI5hMF7byS4eL6q1-cHU2IOPvUIJ7L3ZqBsV1GVGyXRIzHfeJJxBVBjD9mY0aQcrnUl6dmDf7laUcwYm188_SL_ZfK" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=guillaumemeyer/watermarks-remover&type=date&legend=top-left&sealed_token=OLC1f1vbYBuk_xFR_ZH94jbC46Ci9cOhtXLcLIel7gnWVpQu7g-92es0u5d7IV2249FGEO6O7upS8xR_EGk_CwkVXq5yhS77M6zI5hMF7byS4eL6q1-cHU2IOPvUIJ7L3ZqBsV1GVGyXRIzHfeJJxBVBjD9mY0aQcrnUl6dmDf7laUcwYm188_SL_ZfK" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=guillaumemeyer/watermarks-remover&type=date&legend=top-left&sealed_token=OLC1f1vbYBuk_xFR_ZH94jbC46Ci9cOhtXLcLIel7gnWVpQu7g-92es0u5d7IV2249FGEO6O7upS8xR_EGk_CwkVXq5yhS77M6zI5hMF7byS4eL6q1-cHU2IOPvUIJ7L3ZqBsV1GVGyXRIzHfeJJxBVBjD9mY0aQcrnUl6dmDf7laUcwYm188_SL_ZfK" />
- </picture>
-</a>
+ 
 
 ## License
 
 MIT — see [LICENSE](LICENSE).
 
 ## References
-
-- [How Claude marks AI-generated content](https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content) (Anthropic)
-- Dathathri et al., [*Scalable watermarking for identifying large language model outputs*](https://www.nature.com/articles/s41586-024-08025-4) (SynthID-Text, Nature 2024)
-- Google AI for Developers, [*SynthID safeguards*](https://ai.google.dev/responsible/docs/safeguards/synthid) (Gemini API docs)
-- [C2PA](https://c2pa.org/) / [c2patool](https://github.com/contentauth/c2pa-rs/tree/main/cli)
-- Kirchenbauer et al., [*A Watermark for Large Language Models*](https://arxiv.org/abs/2301.10226)
-- Zhang et al., [*Watermarks in the Sand: Impossibility of Strong Watermarking for Generative Models*](https://arxiv.org/abs/2311.04378) (ICML 2024)
-- [google-deepmind/synthid-text](https://github.com/google-deepmind/synthid-text) (research reference; not used for detection here)
-- [aloshdenny/reverse-SynthID](https://github.com/aloshdenny/reverse-SynthID) (research reference)
-- Institute of AI PM, [*AI Content Provenance and Watermarking: The PM's Guide to C2PA and SynthID*](https://www.institutepm.com/knowledge-hub/ai-content-provenance-watermarking) (two-layer industry model: C2PA + imperceptible watermark / soft binding; SB 942 / EU AI Act Art. 50 context)
+ 
